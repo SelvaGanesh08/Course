@@ -1,10 +1,11 @@
 import React from 'react'
+import bg from '../img/bg.jpg'
 function Home() {
 
     return (
         
         <>
-            <section className="hero-section set-bg" data-setbg="img/bg.jpg">
+            <section className="hero-section" style={{backgroundImage:`url(${bg})`}}>
                 <div className="container">
                     <div className="hero-text text-white">
                         <h2>Get The Best Free Online Courses</h2>
