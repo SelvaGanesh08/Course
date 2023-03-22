@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import Preloader from '../components/Preloader'
 
 import {GetLoadingInfo} from '../api/Api'
+import NavBar from '../components/NavBar'
+import FooterBar from '../components/FooterBar'
 
 
 
@@ -12,8 +14,9 @@ function Search() {
     
     const   loading  =useContext(GetLoadingInfo)
     return (
-
-        loading ?  <Preloader/> :( 
+   <>
+    <NavBar/>
+        {loading ?  <Preloader/> :( 
             <>
                 <div className="page-info-section set-bg" data-setbg="img/page-bg/1.jpg">
                     <div className="container">
@@ -39,8 +42,9 @@ function Search() {
 
                 <CourseCard />
             </>
-        )   
-
+        ) }  
+        <FooterBar/>
+</>
     )
 }
 

@@ -24,7 +24,7 @@ function NavBar() {
                         </div>
                         <div className="col-lg-9 col-md-9">
                             <Link to='/login' className='link-logo'>
-                                <h6 href="" className="site-btn header-btn">
+                                <h6  className="site-btn header-btn">
                                     Login
                                 </h6>
                             </Link>
@@ -33,10 +33,10 @@ function NavBar() {
                                 <ul>
 
                                     <li>
-                                        <Link to='/search' className='main-menu-item'>Favourites</Link>
+                                        <Link to='/favourites' className='main-menu-item'>Favourites</Link>
                                     </li>
                                     <li>
-                                        <Link to='/search' className='main-menu-item'>Profile</Link>
+                                        <Link to='/profile' className='main-menu-item'>Profile</Link>
                                     </li>
                                     <li>
                                         <Link to='/search' className='main-menu-item'>Search</Link>

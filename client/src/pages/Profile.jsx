@@ -2,12 +2,11 @@ import React from 'react'
 import FooterBar from '../components/FooterBar'
 import NavBar from '../components/NavBar'
 
-function Favourites(){
+function Profile(){
     <>
     <NavBar/>
     <FooterBar/>
     </>
+
 }
-
-
-export default Favourites
+export default Profile

@@ -1,10 +1,13 @@
 import React from 'react'
+import FooterBar from '../components/FooterBar'
+import NavBar from '../components/NavBar'
 import bg from '../img/bg.jpg'
 function Home() {
 
     return (
         
         <>
+        <NavBar/>
             <section className="hero-section" style={{backgroundImage:`url(${bg})`}}>
                 <div className="container">
                     <div className="hero-text text-white">
@@ -27,6 +30,7 @@ function Home() {
                 </div>
             </section>
             {/* Hero sec*/}
+        <FooterBar/>
         </>
 
 
