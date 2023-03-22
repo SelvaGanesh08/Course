@@ -1,16 +1,16 @@
 import React from 'react'
-
+import signupbg from '../img/signup-bg.jpg'
 
 function Login() {
 
     return (
-            <section className="signin-section spad">
-                <div className="signin-bg set-bg" data-setbg="img/signin-bg.jpg" />
+            <div className="signin-section spad-1">
+                <div className="signin-bg set-bg" style={{backgroundImage:`url(${signupbg})`}}  />
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-5">
                             <div className="signin-warp">
-                                <div className="section-title text-white text-left">
+                                <div className="section-title text-white ">
                                     <h2>Login</h2>
                                 </div>
                                 {/* signin form */}
@@ -27,7 +27,7 @@ function Login() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
     )
 
 }
