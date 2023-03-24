@@ -3,6 +3,9 @@ from django.http import JsonResponse
 import csv
 from django.shortcuts import render
 from .models import Course
+import pandas as pd
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
 
 def load_courses(request):
     with open('path/to/courses.csv') as f:
