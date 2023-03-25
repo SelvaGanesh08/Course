@@ -1,53 +1,124 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 import csv
-from django.shortcuts import render
+from django.db.models import Q
 from .models import Course
+from sklearn.ensemble import RandomForestRegressor
 import pandas as pd
-import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
+import psycopg2
 
-def load_courses(request):
-    with open('path/to/courses.csv') as f:
+def udemy_load_courses(request):
+    with open(r'D:\Course\backend\server\api\data\Course_info.csv','r',encoding='latin-1') as f:
         reader = csv.reader(f)
-        next(reader) # Skip the header row
+        next(reader) 
         for row in reader:
             title = row[0]
             rating = float(row[1])
             reviews = int(row[2])
-            course = Course(title=title, rating=rating, reviews=reviews)
+            url ='https://www.udemy.com'+row[3]
+            course = Course(title=title, rating=rating, reviews=reviews,url = url)
             course.save()
 
-    return render(request, 'courses_loaded.html')
+    return HttpResponse(row)
+
+def cousera_load_courses(request):
+    with open(r'D:\Course\backend\server\api\data\coursera1.csv','r',encoding='latin-1') as f:
+        reader = csv.reader(f)
+        next(reader) 
+        for row in reader:
+            if row[0]!='' and row[1]!='' and  row[2]!='' and row[2]!='':
+                title = row[0]
+                rating = float(row[1])
+                reviews = int(row[2]) 
+                url = row[3]
+                course = Course(title=title, rating=rating, reviews=reviews,url=url)
+                course.save()
+            else:
+                None
+    return HttpResponse(row)
+
+# def recommend_courses(request):
+    course_title = request.GET.get('q')
+    # Get the course object for the given title
+    course = Course.objects.filter(Q(title__icontains=course_title)).values().first()
+
+   
+    # Find courses that are similar to the given course
+    similar_courses = Course.objects.filter(
+        ~Q(title__icontains=course_title),  # Exclude the original course
+        rating__gte=course.get('rating') - 0.5,
+        rating__lte=course.get('rating') + 0.5,
+        reviews__gte=course.get('reviews') - 50,
+        reviews__lte=course.get('reviews') + 50
+    ).values()
+
+    # Calculate the similarity score for each similar course
+    recommendations = []
+    for similar_course in similar_courses:
+        similarity = 0
+        if similar_course.get('rating') == course.get('rating'):
+            similarity += 1
+        if abs(similar_course.get('reviews') - course.get('reviews')) <= 50:
+            similarity += 1
+        print(similarity)
+
+    # Sort the recommendations by similarity score
+    recommendations = sorted(recommendations, key=lambda x: x.similarity, reverse=True)
+
+    # Render the template with the recommendations
+    return HttpResponse(recommendations)
 
 
+# def recommend_courses(request):
+    query = request.GET.get('q')
+    courses = Course.objects.filter(
+        Q(title__icontains=query) |
+        Q(url__icontains=query)
+    ).order_by('-rating', '-reviews')
+    course_list = list(courses.values())  # Convert QuerySet to list of dictionaries
+    return JsonResponse( course_list,safe=False)
 
+def recommend_courses(request):
+    # Get user query from request object
+    query = request.GET.get('q')
 
-def recommend_courses(request, title):
-    # Step 1: Get the input course by title
-    try:
-        input_course = Course.objects.get(title=title)
-    except Course.DoesNotExist:
-        return JsonResponse({'error': 'Course not found.'})
+    # Connect to PostgreSQL database
+    conn = psycopg2.connect(database="CourseCuer", user="postgres", password="root", host="localhost", port="5432")
+    cur = conn.cursor()
 
-    # Step 2: Calculate the similarity scores
-    ratings = Course.objects.values_list('rating', 'reviews')
-    similarity_matrix = cosine_similarity(ratings)
+    # Retrieve courses similar to user query from database
+    cur.execute("SELECT * FROM courses WHERE title ILIKE %s", ('%' + query + '%',))
+    courses = cur.fetchall()
 
-    # Step 3: Get the indices of the courses similar to the input course
-    input_index = input_course.pk - 1
-    sim_scores = list(enumerate(similarity_matrix[input_index]))
-    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    sim_scores = sim_scores[1:6] # Get the top 5 similar courses
+    # Convert courses to pandas dataframe
+    courses_df = pd.DataFrame(courses, columns=['id', 'title', 'rating', 'reviews', 'url'])
 
-    # Step 4: Get the recommended courses
-    course_indices = [x[0] for x in sim_scores]
-    recommended_courses = Course.objects.filter(pk__in=course_indices)
+    # Train random forest model on all courses in the database
+    cur.execute("SELECT * FROM courses")
+    all_courses = cur.fetchall()
+    all_courses_df = pd.DataFrame(all_courses, columns=['id', 'title', 'rating', 'reviews', 'url'])
+    X_train = all_courses_df[['rating', 'reviews']]
+    y_train = all_courses_df['reviews']
+    rf = RandomForestRegressor()
+    rf.fit(X_train, y_train)
 
-    # Step 5: Return the recommended courses
-    data = {
-        'input_course': input_course.title,
-        'recommended_courses': [c.title for c in recommended_courses]
-    }
-    return JsonResponse(data)
+    # Make predictions on all courses in the database
+    X_test = courses_df[['rating', 'reviews']]
+    predictions = rf.predict(X_test)
+    courses_df['prediction'] = predictions
 
+    # Rank courses by predicted score and return top 10
+    ranked_courses = courses_df.sort_values('prediction', ascending=False)[:20]
+
+    # Convert ranked courses to JSON format and return
+    courses_list = []
+    for index, row in ranked_courses.iterrows():
+        course = {}
+        course['id'] = row['id']
+        course['title'] = row['title']
+        course['rating'] = row['rating']
+        course['reviews'] = row['reviews']
+        course['url'] = row['url']
+        courses_list.append(course)
+
+    return JsonResponse({'courses': courses_list})
