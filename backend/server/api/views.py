@@ -108,7 +108,7 @@ def recommend_courses(request):
     courses_df['prediction'] = predictions
 
     # Rank courses by predicted score and return top 10
-    ranked_courses = courses_df.sort_values('prediction', ascending=False)[:20]
+    ranked_courses = courses_df.sort_values('prediction', ascending=False)[:9]
 
     # Convert ranked courses to JSON format and return
     courses_list = []

@@ -1,7 +1,7 @@
 
 html,
 body {
-	background-color: black;
+	background-color: rgb(255, 255, 255);
 	height: 100%;
 	font-family: 'Raleway', sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -190,7 +190,7 @@ ol {
   display: grid;
   justify-content: center;
   align-items: center;
-  height: 700px;
+  height: 600px;
   background-color:transparent;
 }
 
@@ -352,6 +352,18 @@ ol {
 	font-weight: 500;
 	margin-bottom: 20px;
 }
+.hero-text-1 {
+	text-align: center;
+	padding-top: 100px;
+	margin-bottom: 105px;
+}
+
+.hero-text-1 h3 {
+	font-size: 60px;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+
 
 .intro-newslatter input[type=text],
 .intro-newslatter input[type=email] {
@@ -507,16 +519,25 @@ ol {
 	padding: 0 15px;
 	margin: 0 auto -30px;
 }
-
+.course-items-area{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	background-color: transparent;
+	
+	padding: 100px;
+}
 .course-item {
-	margin-bottom: 30px;
+	
+	padding: 20px;
+	font-size: 30px;
+	text-align: center;
 }
 
 .course-item .course-thumb {
 	height: 270px;
 }
 
-.course-item .course-thumb .price {
+.course-item .price {
 	font-size: 14px;
 	color: #fff;
 	font-weight: 600;
@@ -527,6 +548,7 @@ ol {
 }
 
 .course-item .course-info {
+	height: 200px;
 	background: #edf4f6;
 }
 
@@ -546,8 +568,9 @@ ol {
 
 .course-item .course-info .course-author {
 	border-top: 1px solid #d4dee1;
-	padding: 14px 33px;
-	overflow: hidden;
+	
+	
+	
 }
 
 .course-item .course-info .course-author .ca-pic {
@@ -557,16 +580,17 @@ ol {
 	float: left;
 }
 
-.course-item .course-info .course-author p {
-	padding-left: 60px;
+.course-item .course-info .course-author  a {
+	text-decoration: none;
+	padding: 60px;
+	gap: 10px;
 	margin-bottom: 0;
 	padding-top: 7px;
 	font-weight: 600;
-}
-
-.course-item .course-info .course-author p span {
 	color: #d82a4e;
 }
+
+
 
 .course-item.featured-course {
 	position: relative;
@@ -741,7 +765,7 @@ ol {
 ---------------------*/
 
 .footer-section {
-	background-color: #000;
+	background-color: #ffffff;
 	border-top: 3px solid #d82a4e;
 }
 
