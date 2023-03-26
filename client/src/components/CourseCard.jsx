@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CourseCard(){
+function CourseCard(prop){
 
     return(
         <>
@@ -12,12 +12,11 @@ function CourseCard(){
       </div>
       <div className="course-info">
         <div className="course-text">
-          <h5>IT Development</h5>
+          <h5>{prop.title}</h5>
           <p>Lorem ipsum dolor sit amet, consectetur</p>
           <div className="students">120 Students</div>
         </div>
         <div className="course-author">
-          <div className="ca-pic set-bg" data-setbg="img/authors/2.jpg" />
           <p>
             William Parker, <span>Developer</span>
           </p>
