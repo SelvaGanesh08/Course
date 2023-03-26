@@ -11,7 +11,7 @@ function Api() {
 
     const getData = () => {
         setLoading(true);
-        fetch('https://api.quotable.io/random')
+        fetch('https://localhost/api/v2/recommend')
             .then((res) => res.json())
             .then((data) => {
                 setLoading(false);
