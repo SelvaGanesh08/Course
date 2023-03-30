@@ -40,7 +40,7 @@ class LoginView(APIView):
 
 
 def udemy_load_courses(request):
-    with open(r'C:\Users\Students\Desktop\Course\backend\server\api\data\Course_info.csv','r',encoding='latin-1') as f:
+    with open(r'C:\Users\Ganork\Desktop\Course\backend\server\api\data\Course_info.csv','r',encoding='latin-1') as f:
         reader = csv.reader(f)
         next(reader) 
         for row in reader:
@@ -54,7 +54,7 @@ def udemy_load_courses(request):
     return HttpResponse(row)
 
 def cousera_load_courses(request):
-    with open(r'C:\Users\Students\Desktop\Course\backend\server\api\data\coursera1.csv','r',encoding='latin-1') as f:
+    with open(r'C:\Users\Ganork\Desktop\Course\backend\server\api\data\coursera1.csv','r',encoding='latin-1') as f:
         reader = csv.reader(f)
         next(reader) 
         for row in reader:
