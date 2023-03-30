@@ -37,72 +37,23 @@ def cousera_load_courses(request):
                 None
     return HttpResponse(row)
 
-# def recommend_courses(request):
-    course_title = request.GET.get('q')
-    # Get the course object for the given title
-    course = Course.objects.filter(Q(title__icontains=course_title)).values().first()
-
-   
-    # Find courses that are similar to the given course
-    similar_courses = Course.objects.filter(
-        ~Q(title__icontains=course_title),  # Exclude the original course
-        rating__gte=course.get('rating') - 0.5,
-        rating__lte=course.get('rating') + 0.5,
-        reviews__gte=course.get('reviews') - 50,
-        reviews__lte=course.get('reviews') + 50
-    ).values()
-
-    # Calculate the similarity score for each similar course
-    recommendations = []
-    for similar_course in similar_courses:
-        similarity = 0
-        if similar_course.get('rating') == course.get('rating'):
-            similarity += 1
-        if abs(similar_course.get('reviews') - course.get('reviews')) <= 50:
-            similarity += 1
-        print(similarity)
-
-    # Sort the recommendations by similarity score
-    recommendations = sorted(recommendations, key=lambda x: x.similarity, reverse=True)
-
-    # Render the template with the recommendations
-    return HttpResponse(recommendations)
-
-
-# def recommend_courses(request):
-    query = request.GET.get('q')
-    courses = Course.objects.filter(
-        Q(title__icontains=query) |
-        Q(url__icontains=query)
-    ).order_by('-rating', '-reviews')
-    course_list = list(courses.values())  # Convert QuerySet to list of dictionaries
-    return JsonResponse( course_list,safe=False)
-
 def recommend_courses(request):
     # Get user query from request object
     query = request.GET.get('q')
 
-    # Connect to PostgreSQL database
-    conn = psycopg2.connect(database="CourseCuer", user="postgres", password="root", host="localhost", port="5432")
-    cur = conn.cursor()
-
-    # Retrieve courses similar to user query from database
-    cur.execute("SELECT * FROM courses WHERE title ILIKE %s", ('%' + query + '%',))
-    courses = cur.fetchall()
-
-    # Convert courses to pandas dataframe
-    courses_df = pd.DataFrame(courses, columns=['id', 'title', 'rating', 'reviews', 'url'])
+   # Retrieve courses similar to user query from database
+    courses = Course.objects.filter(title__icontains=query)
 
     # Train random forest model on all courses in the database
-    cur.execute("SELECT * FROM courses")
-    all_courses = cur.fetchall()
-    all_courses_df = pd.DataFrame(all_courses, columns=['id', 'title', 'rating', 'reviews', 'url'])
+    all_courses = Course.objects.all()
+    all_courses_df = pd.DataFrame(list(all_courses.values('rating', 'reviews')))
     X_train = all_courses_df[['rating', 'reviews']]
     y_train = all_courses_df['reviews']
     rf = RandomForestRegressor()
     rf.fit(X_train, y_train)
 
     # Make predictions on all courses in the database
+    courses_df = pd.DataFrame(list(courses.values('rating', 'reviews')))
     X_test = courses_df[['rating', 'reviews']]
     predictions = rf.predict(X_test)
     courses_df['prediction'] = predictions
@@ -114,11 +65,11 @@ def recommend_courses(request):
     courses_list = []
     for index, row in ranked_courses.iterrows():
         course = {}
-        course['id'] = row['id']
-        course['title'] = row['title']
-        course['rating'] = row['rating']
-        course['reviews'] = row['reviews']
-        course['url'] = row['url']
+        course['id'] = courses[index].id
+        course['title'] = courses[index].title
+        course['rating'] = courses[index].rating
+        course['reviews'] = courses[index].reviews
+        course['url'] = courses[index].url
         courses_list.append(course)
 
     return JsonResponse({'courses': courses_list})
