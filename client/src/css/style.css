@@ -702,6 +702,7 @@ ol {
 
 .signin-form input[type=text],
 .signin-form input[type=email],
+.signin-form input[type=password],
 .signin-form textarea,
 .contact-form input[type=text],
 .contact-form input[type=email],
