@@ -6,6 +6,38 @@ from .models import Course
 from sklearn.ensemble import RandomForestRegressor
 import pandas as pd
 import psycopg2
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import CustomUser
+from .serializers import CustomUserSerializer
+
+class RegistrationView(APIView):
+    def post(self, request):
+        serializer = CustomUserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LoginView(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
+        user = CustomUser.objects.filter(email=email).first()
+        if user and user.check_password(password):
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
+        return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
 
 def udemy_load_courses(request):
     with open(r'C:\Users\Students\Desktop\Course\backend\server\api\data\Course_info.csv','r',encoding='latin-1') as f:
@@ -73,3 +105,5 @@ def recommend_courses(request):
         courses_list.append(course)
 
     return JsonResponse({'courses': courses_list})
+
+

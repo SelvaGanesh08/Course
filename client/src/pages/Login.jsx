@@ -1,7 +1,17 @@
-import React from 'react'
+import React,{useState} from 'react'
 import signupbg from '../img/signup-bg.jpg'
-
+import axios from 'axios'
 function Login() {
+    const [email,setEmail]=useState('')
+    const [password,setPassword]= useState('')
+    const[name,setName]=useState('')
+    const[password2,setPassword2]=useState('')
+
+    const handleChange= async (e)=>{
+        e.preventDefault()
+        const token= await axios.post('http://127.0.0.1:8000/api/v2/register',{email,name,password,password2})
+        console.log(token.data)
+    }
 
     return (
             <div className="signin-section spad-1">
@@ -14,14 +24,16 @@ function Login() {
                                     <h2>Login</h2>
                                 </div>
                                 {/* signin form */}
-                                <form className="signin-form">
-                                    <input type="text" placeholder="Your Name" />
-                                    <input type="text" placeholder="Your Phone" />
+                                <form className="signin-form" onSubmit={handleChange}>
+                                    <input type="text" onChange={(e)=>setName(e.target.value)} placeholder="Your Name" />
+                                    <input type="email" onChange={(e)=>setEmail(e.target.value)} placeholder="Your Email" />
+                                    <input type="password" onChange={(e)=>setPassword(e.target.value)} placeholder="Your Password" />
+                                    <input type="password" onChange={(e)=>setPassword2(e.target.value)} placeholder="Your Password" />
                                     <label htmlFor="v-upload" className="file-up-btn">
                                         New Sign Up
                                     </label>
                                     <input type="file" id="v-upload" />
-                                    <button className="site-btn">Register</button>
+                                    <input type="submit" className="site-btn"/>
                                 </form>
                             </div>
                         </div>
