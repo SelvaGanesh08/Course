@@ -68,12 +68,14 @@ CORS_ORIGIN_ALLOWED_HOSTS = [
     'http://localhost:5173',
     'http://127.0.0.1:7000',
     'http://localhost:5173/',
+    'https://tranquil-mochi-0c2e3c.netlify.app',
 ]
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:5173',
     'http://127.0.0.1:7000',
-    'http://localhost:5173'
+    'http://localhost:5173',
+    'https://tranquil-mochi-0c2e3c.netlify.app',
 ]
 
 
