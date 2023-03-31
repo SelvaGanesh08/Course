@@ -7,7 +7,7 @@ function NavBar() {
     return (
 
         <>
-            {/* Header section */}
+            
             <header className="header-section">
                 <div className="container">
                     <div className="row">
@@ -52,7 +52,6 @@ function NavBar() {
                     </div>
                 </div>
             </header>
-            {/* Header section end */}
         </>
 
     )

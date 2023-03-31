@@ -12,11 +12,11 @@ function FooterBar(){
             <h4>Contact Info</h4>
             <ul className="contact-list">
               <li>
-                1481 Creekside Lane <br />
-                Avila Beach, CA 931
+                Krishnapuram <br />
+                tirunelveli, tamilnadu-627011
               </li>
-              <li>+53 345 7953 32453</li>
-              <li>yourmail@gmail.com</li>
+              <li>+91 9080786617</li>
+              <li>selvaganesh@gmail.com</li>
             </ul>
           </div>
           <div className="widget-item">

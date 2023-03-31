@@ -11,12 +11,8 @@ function Home() {
             <section className="hero-section" style={{backgroundImage:`url(${bg})`}}>
                 <div className="container">
                     <div className="hero-text text-white">
-                        <h2>Get The Best Free Online Courses</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                            malesuada lorem maximus mauris scelerisque, at rutrum nulla <br />{" "}
-                            dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
-                        </p>
+                        <h2>Get The Best Online Courses</h2>
+                        
                     </div>
                 </div>
             </section>
