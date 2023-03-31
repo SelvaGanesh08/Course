@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse,HttpResponse
 import csv
-from django.db.models import Q
 from .models import Course
 from sklearn.ensemble import RandomForestRegressor
 import pandas as pd
-import psycopg2
+
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response

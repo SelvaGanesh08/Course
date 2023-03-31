@@ -17,7 +17,7 @@ function Search() {
        
         const fetchuser = async () => {
             setLoading(true)
-            await axios.get(`http://127.0.0.1:8000/api/v2/search/?q=${query}`).then((data) => {
+            await axios.get(`http://cuering-env.eba-murye7pz.us-west-2.elasticbeanstalk.com/api/v2/search/?q=${query}`).then((data) => {
                 setLoading(false);
                 console.log(data.data.courses)
                 setData(data.data.courses);
