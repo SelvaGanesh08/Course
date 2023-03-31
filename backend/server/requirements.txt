@@ -6,7 +6,6 @@ djangorestframework-simplejwt
 joblib
 numpy
 pandas
-psycopg2
 PyJWT
 python-dateutil
 pytz
@@ -15,4 +14,4 @@ scipy
 six
 sqlparse
 threadpoolctl
-tzdata==
+tzdata
