@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lyk)e@#s^-e8q+(9-rkgs8&*8h+#ksh@51q!jzj_06p10aa^aa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*',]
 
@@ -77,8 +77,6 @@ CORS_ORIGIN_ALLOWED_HOSTS = [
     'http://localhost:5173',
     'http://127.0.0.1:7000',
     'http://localhost:5173/',
-    'https://tranquil-mochi-0c2e3c.netlify.app',
-    'http://cuering-env.eba-murye7pz.us-west-2.elasticbeanstalk.com',
     'https://coursecuer.netlify.app',
 ]
 
@@ -86,9 +84,6 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:5173',
     'http://127.0.0.1:7000',
     'http://localhost:5173',
-    'https://tranquil-mochi-0c2e3c.netlify.app',
-    'http://cuering-env.eba-murye7pz.us-west-2.elasticbeanstalk.com',
-    'http://cuering-env.eba-murye7pz.us-west-2.elasticbeanstalk.com',
     'https://coursecuer.netlify.app',
 ]
 
