@@ -41,11 +41,11 @@ function NavBar() {
                     Favourites
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="/profile" className="main-menu-item">
                     Profile
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="/search" className="main-menu-item">
                     Search
