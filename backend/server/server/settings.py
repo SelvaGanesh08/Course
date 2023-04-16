@@ -91,7 +91,7 @@ CORS_ORIGIN_WHITELIST = [
     'https://coursecuer.onrender.com',
     'https://*.onrender.com',
     'coursecuer.onrender.com',
-    
+    'https://coursecuer.onrender.com/'
     
 ]
 
