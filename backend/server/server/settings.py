@@ -72,9 +72,24 @@ SIMPLE_JWT = {
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
 }
 
+CORS_ORIGIN_ALLOWED_HOSTS = [
+    'http://localhost:5173',
+    'http://127.0.0.1:7000',
+    'http://localhost:5173/',
+    'https://tranquil-mochi-0c2e3c.netlify.app',
+    'http://cuering-env.eba-murye7pz.us-west-2.elasticbeanstalk.com',
+    'https://coursecuer.netlify.app',
+]
 
-
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:5173',
+    'http://127.0.0.1:7000',
+    'http://localhost:5173',
+    'https://tranquil-mochi-0c2e3c.netlify.app',
+    'http://cuering-env.eba-murye7pz.us-west-2.elasticbeanstalk.com',
+    'http://cuering-env.eba-murye7pz.us-west-2.elasticbeanstalk.com',
+    'https://coursecuer.netlify.app',
+]
 
 
 ROOT_URLCONF = 'server.urls'
