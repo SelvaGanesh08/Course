@@ -16,7 +16,7 @@ function Search() {
     const fetchdata = async () => {
       setLoading(true);
       await axios
-        .get(`http://127.0.0.1:8000/api/v2/search/?q=${query}`)
+        .get(`http://coursecuer-env.eba-murye7pz.us-west-2.elasticbeanstalk.com/api/v2/search/?q=${query}`)
         .then((data) => {
           setLoading(false);
       
@@ -26,7 +26,7 @@ function Search() {
     const fetchAuthdata = async () => {
       setLoading(true);
       await axios
-        .get(`http://127.0.0.1:8000/api/v2/search/?q=${query}&user_id=${userData.user_id}`)
+        .get(`http://coursecuer-env.eba-murye7pz.us-west-2.elasticbeanstalk.com/api/v2/search/?q=${query}&user_id=${userData.user_id}`)
         .then((data) => {
           setLoading(false);
           

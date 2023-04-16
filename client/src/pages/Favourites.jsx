@@ -18,7 +18,7 @@ function Favourites() {
       try {
         // Make API request to get favorite courses for user
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/v2/favorite-courses/?user_id=${userData.user_id}`
+          `http://coursecuer-env.eba-murye7pz.us-west-2.elasticbeanstalk.com/api/v2/favorite-courses/?user_id=${userData.user_id}`
         );
         // Update state with fetched favorite courses data
         setLoading(false);

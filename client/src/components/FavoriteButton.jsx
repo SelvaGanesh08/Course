@@ -7,7 +7,7 @@ const FavoritesButton = ({ courseId, userId, fav }) => {
 
   const handleToggleFavorite = async () => {
     try {
-      await axios.post('http://127.0.0.1:8000/api/v2/add-to-favorites/', {
+      await axios.post('http://coursecuer-env.eba-murye7pz.us-west-2.elasticbeanstalk.com/api/v2/add-to-favorites/', {
         course_id: courseId,
         user_id: userId,
       });

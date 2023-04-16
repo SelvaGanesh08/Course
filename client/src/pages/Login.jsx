@@ -18,7 +18,7 @@ function Login() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/v2/login", {
+      const response = await axios.post("http://coursecuer-env.eba-murye7pz.us-west-2.elasticbeanstalk.com/api/v2/login", {
         email,
         password,
       });
@@ -41,7 +41,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v2/register",
+        "http://coursecuer-env.eba-murye7pz.us-west-2.elasticbeanstalk.com/api/v2/register",
         { email, name, password, password2 }
       );
       const { access, refresh } = response.data;
