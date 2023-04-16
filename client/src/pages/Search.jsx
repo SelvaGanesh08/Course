@@ -19,7 +19,7 @@ function Search() {
         .get(`http://127.0.0.1:8000/api/v2/search/?q=${query}`)
         .then((data) => {
           setLoading(false);
-          console.log(data.data.courses);
+      
           setData(data.data.courses);
         });
     };
@@ -29,7 +29,7 @@ function Search() {
         .get(`http://127.0.0.1:8000/api/v2/search/?q=${query}&user_id=${userData.user_id}`)
         .then((data) => {
           setLoading(false);
-          console.log(data.data.courses);
+          
           setData(data.data.courses);
         });
     };

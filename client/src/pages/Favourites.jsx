@@ -14,7 +14,6 @@ function Favourites() {
 
   useEffect(() => {
     const fetchFavoriteCourses = async () => {
-      console.log(userData);
       setLoading(true);
       try {
         // Make API request to get favorite courses for user
@@ -24,7 +23,7 @@ function Favourites() {
         // Update state with fetched favorite courses data
         setLoading(false);
         setFavoriteCourses(response.data.favorite_courses);
-        console.log(response.data.favorite_courses);
+        
       } catch (error) {
         // Handle error and show error message
         console.error("Failed to fetch favorite courses:", error);
