@@ -1,12 +1,13 @@
-import React from 'react'
-import FooterBar from '../components/FooterBar'
-import NavBar from '../components/NavBar'
+import React from "react";
+import FooterBar from "../components/FooterBar";
+import NavBar from "../components/NavBar";
 
-function Profile(){
+function Profile() {
+  return (
     <>
-    <NavBar/>
-    <FooterBar/>
+      <NavBar />
+      <FooterBar />
     </>
-
+  );
 }
-export default Profile
+export default Profile;

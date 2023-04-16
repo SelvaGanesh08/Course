@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from .models import CustomUser
-
+from .models import Course
 class CustomUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
@@ -26,3 +26,25 @@ class CustomUserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+from rest_framework import serializers
+from .models import Course
+
+class CourseSerializer(serializers.ModelSerializer):
+    # Add 'is_favorited' field to the serializer
+    is_favorited = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Course
+        fields = ['id', 'title', 'rating', 'reviews', 'url', 'is_favorited']
+
+    def get_is_favorited(self, obj):
+        # Get user_id from request context
+        user_id = self.context['request'].query_params.get('user_id')
+        try:
+            # Get user object from user_id
+            user = CustomUser.objects.get(id=user_id)
+            # Check if course is in user's favorite courses
+            return obj in user.favorite_courses.all()
+        except CustomUser.DoesNotExist:
+            return False

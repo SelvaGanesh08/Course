@@ -10,12 +10,10 @@ class Course(models.Model):
 
     class Meta:
         db_table = 'courses'
-
+        
     def __str__(self):
         return self.title
-
-
-
+    
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, name, password=None):
         if not email:
@@ -40,12 +38,14 @@ class CustomUserManager(BaseUserManager):
         return user
 
 class CustomUser(AbstractBaseUser):
+    
     email = models.EmailField(verbose_name='email address', unique=True)
     name = models.CharField(max_length=255)
+    favorite_courses = models.ManyToManyField(Course, related_name='users_favorite', blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 
