@@ -17,7 +17,7 @@ function Search() {
     const fetchdata = async () => {
       setLoading(true);
       await axios
-        .get(`https://coursecuerbackend.onrender.com/api/v2/search/?q=${query}`,{withCredentials: true})
+        .get(`https://coursecuerbackend.onrender.com/api/v2/search/?q=${query}`,)
         .then((data) => {
           setLoading(false);
       
