@@ -19,7 +19,7 @@ function Login() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://coursecuerbackend.onrender.com/api/v2/login", {
+      const response = await axios.post("https://selvaganesh0809.pythonanywhere.com/api/v2/login", {
         email,
         password,
       });
@@ -42,7 +42,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://coursecuerbackend.onrender.com/api/v2/register",
+        "https://selvaganesh0809.pythonanywhere.com/api/v2/register",
         { email, name, password, password2 }
       );
       const { access, refresh } = response.data;

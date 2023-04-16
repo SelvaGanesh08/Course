@@ -13,13 +13,11 @@ function Search() {
   const [data, setData] = useState([]);
   const { isAuthenticated,userData } = useContext(AuthContext);
   axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-  axios.defaults.headers.common['Access-Control-Allow-Credentials'] = 'true';
-  
   useEffect(() => {
     const fetchdata = async () => {
       setLoading(true);
       await axios
-        .get(`https://coursecuerbackend.onrender.com/api/v2/search/?q=${query}`)
+        .get(`https://selvaganesh0809.pythonanywhere.com/api/v2/search/?q=${query}`)
         .then((data) => {
           setLoading(false);
       
@@ -29,7 +27,7 @@ function Search() {
     const fetchAuthdata = async () => {
       setLoading(true);
       await axios
-        .get(`https://coursecuerbackend.onrender.com/api/v2/search/?q=${query}&user_id=${userData.user_id}`)
+        .get(`https://selvaganesh0809.pythonanywhere.com/api/v2/search/?q=${query}&user_id=${userData.user_id}`)
         .then((data) => {
           setLoading(false);
           
