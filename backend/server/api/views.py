@@ -193,9 +193,6 @@ def recommend_courses(request):
             courses_list.append(course)
     
 
-    response_data = {'courses': courses_list}
-    response = Response(response_data)
-    response['Access-Control-Allow-Origin'] = 'https://coursecuer.netlify.app'
-    return response
+    return JsonResponse({'courses': courses_list})
 
 

@@ -12,7 +12,8 @@ function Search() {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
   const { isAuthenticated,userData } = useContext(AuthContext);
-  axios.defaults.headers.common['access-control-allow-origin'] = '*';
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+  axios.defaults.headers.common['Access-Control-Allow-Credentials'] = 'true';
   
   useEffect(() => {
     const fetchdata = async () => {
