@@ -80,6 +80,7 @@ CORS_ORIGIN_ALLOWED_HOSTS = [
     'https://coursecuer.netlify.app',
     'https://coursecuer.onrender.com',
     'https://*.onrender.com',
+    'coursecuer.onrender.com',
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -89,6 +90,8 @@ CORS_ORIGIN_WHITELIST = [
     'https://coursecuer.netlify.app',
     'https://coursecuer.onrender.com',
     'https://*.onrender.com',
+    'coursecuer.onrender.com',
+    
     
 ]
 
