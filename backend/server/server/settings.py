@@ -26,31 +26,42 @@ SECRET_KEY = 'django-insecure-lyk)e@#s^-e8q+(9-rkgs8&*8h+#ksh@51q!jzj_06p10aa^aa
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ORIGIN_ALLOWED_HOSTS = [
-#     'http://localhost:5173',
-#     'http://127.0.0.1:7000',
-#     'http://localhost:5173/',
-#     'https://coursecuer.netlify.app',
-#     'https://coursecuer.onrender.com',
-#     'https://*.onrender.com',
-#     'coursecuer.onrender.com',
-#     'https://coursecuer.onrender.com/'
-# ]
+CORS_ORIGIN_ALLOWED_HOSTS = [
+    'http://localhost:5173',
+    'http://127.0.0.1:7000',
+    'http://localhost:5173/',
+    'https://coursecuer.netlify.app',
+    'https://coursecuer.onrender.com',
+    'https://*.onrender.com',
+    'coursecuer.onrender.com',
+    'https://coursecuer.onrender.com/'
+]
 
-# CORS_ORIGIN_WHITELIST = [
-#     'http://localhost:5173',
-#     'http://127.0.0.1:7000',
-#     'http://localhost:5173',
-#     'https://coursecuer.netlify.app',
-#     'https://coursecuer.onrender.com',
-#     'https://*.onrender.com',
-#     'coursecuer.onrender.com',
-#     'https://coursecuer.onrender.com/'
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:5173',
+    'http://127.0.0.1:7000',
+    'http://localhost:5173',
+    'https://coursecuer.netlify.app',
+    'https://coursecuer.onrender.com',
+    'https://*.onrender.com',
+    'coursecuer.onrender.com',
+    'https://coursecuer.onrender.com/'
     
-# ]
+]
 
-
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'access-control-allow-credentials',
+    'access-control-allow-origin',  # Add other allowed headers as needed
+]
 # Application definition
 
 INSTALLED_APPS = [
