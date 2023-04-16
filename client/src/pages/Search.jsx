@@ -13,6 +13,7 @@ function Search() {
   const [data, setData] = useState([]);
   const { isAuthenticated,userData } = useContext(AuthContext);
   axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://coursecuer.onrender.com,https://coursecuerbackend.onrender.com';
+  axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true;
   useEffect(() => {
     const fetchdata = async () => {
       setLoading(true);
