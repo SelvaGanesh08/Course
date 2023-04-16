@@ -1,7 +1,6 @@
 import React, { useEffect,useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../img/Logo.png";
-import Cookies from "js-cookie";
 
 import { AuthContext } from "./Auth";
 

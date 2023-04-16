@@ -8,7 +8,7 @@ import { AuthContext } from "../components/Auth";
 import i from "../img/2.jpg";
 import { Link } from "react-router-dom";
 function Favourites() {
-  axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://coursecuer.netlify.app';
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
   const [loading, setLoading] = useState(false);
   const [favoriteCourses, setFavoriteCourses] = useState([]);
   const { userData } = useContext(AuthContext);
