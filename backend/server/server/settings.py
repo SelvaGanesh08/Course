@@ -78,6 +78,7 @@ CORS_ORIGIN_ALLOWED_HOSTS = [
     'http://127.0.0.1:7000',
     'http://localhost:5173/',
     'https://coursecuer.netlify.app',
+    'https://coursecuer.onrender.com',
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -85,6 +86,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:7000',
     'http://localhost:5173',
     'https://coursecuer.netlify.app',
+    'https://coursecuer.onrender.com',
+    
 ]
 
 
