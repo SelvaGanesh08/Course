@@ -7,6 +7,7 @@ import { Navigate, json } from "react-router-dom";
 import { AuthContext } from "../components/Auth";
 
 function Login() {
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://coursecuer.netlify.app';
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");

@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../css/FavoritesButton.css' // Import the CSS file for styling
 
 const FavoritesButton = ({ courseId, userId, fav }) => {
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://coursecuer.netlify.app';
   const [isFavorite, setIsFavorite] = useState(fav);
 
   const handleToggleFavorite = async () => {
