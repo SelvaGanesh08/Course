@@ -12,13 +12,13 @@ function Search() {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
   const { isAuthenticated,userData } = useContext(AuthContext);
-  axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://coursecuer.onrender.com,https://coursecuerbackend.onrender.com';
-  axios.defaults.headers.common['Access-Control-Allow-Credentials'] = 'include';
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'https://coursecuer.onrender.com';
+  
   useEffect(() => {
     const fetchdata = async () => {
       setLoading(true);
       await axios
-        .get(`https://coursecuerbackend.onrender.com/api/v2/search/?q=${query}`,{withCredentials: true})
+        .get(`https://coursecuerbackend.onrender.com/api/v2/search/?q=${query}`)
         .then((data) => {
           setLoading(false);
       
