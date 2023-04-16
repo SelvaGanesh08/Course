@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import signupbg from "../img/signup-bg.jpg";
 import axios from "axios";
+
 import jwt from "jwt-decode";
 import { Navigate, json } from "react-router-dom";
 import { AuthContext } from "../components/Auth";
@@ -45,7 +46,12 @@ function Login() {
       );
       const { access, refresh } = response.data;
       // Set access and refresh tokens to localStorage or session storage
+      const decodeToken = jwt(access);
+      var now = new Date();
+      // Set expiration time to 6 hours later from current time
+      var expirationTime = new Date(now.getTime() + 6 * 60 * 60 * 1000); // 6 hours = 6 * 60 minutes * 60 seconds * 1000 milliseconds
       setUserdata(decodeToken);
+      localStorage.setItem("decode", JSON.stringify(decodeToken));
       localStorage.setItem("access_token", access);
       localStorage.setItem("refresh_token", refresh);
       setIsAuthenticated(true);

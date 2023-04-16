@@ -11,23 +11,22 @@ function CourseCard({ data }) {
         <div className="course-item" key={item.id}>
           <div className="price">{item.title}</div>
           <div className="course-info">
-            <div className="course-text">
-              <h5>Rating{item.rating}</h5>
-
-              <div className="students">Reviews:{item.reviews}</div>
-              <span className="course-author">
-                <a href={item.url}>Vist</a>
-              </span>
-            </div>
-            <div className="course-author">
-              {isAuthenticated && (
+          {isAuthenticated && (
                 <FavoritesButton
                   courseId={item.id}
                   userId={userData.user_id}
                   fav={item.is_favorited}
                 />
               )}
+            <div className="course-text">
+              <h5>Rating: {item.rating}</h5>
+
+              <div className="students">Reviews: {item.reviews}</div>
+              <span className="course-author">
+                <a href={item.url}>Vist</a>
+              </span>
             </div>
+           
           </div>
         </div>
       ))}
